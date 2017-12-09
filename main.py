@@ -1,25 +1,14 @@
+import numpy as np
+
 import purify
 import find
-
-
-def backward_grab(string, index):
-    start = 0
-    if string[0] == '-':
-        start = 1
-    return string[start:index]
-
-
-def forward_grab(string, index):
-    index += 1
-    next_index, o_type = find.operators(string, index)
-    if next_index == -1:
-        return string[index:]
-    return string[index:next_index]
+import grab
+import merge
 
 
 def check_array_order(array, level):
     while level > len(array) - 1:
-        array.append([0])
+        array.append([])
 
 
 def value_level_read(string):
@@ -37,7 +26,6 @@ def value_level_read(string):
 
 
 def build_2d_array(array, string, o_type):
-    print(string)
     if string.isalpha():
         check_array_order(array, 1)
         array[1].append(1.0 * o_type)
@@ -47,23 +35,28 @@ def build_2d_array(array, string, o_type):
         array[level].append(value * o_type)
 
 
-def main():
-    test = "-3X^0 + X^0 + 2X^1 + 5X^2"
-    array = [[0]]
-    pure_string = purify.equation(test)
-    index, o_type = find.operators(pure_string, 0)
-    if index != 0:
-        build_2d_array(array, backward_grab(pure_string, index), 1)
+def simplify(equation):
+    array = [[]]
+    index, o_type = find.operators(equation, 0)
+    if index != 0 or index == -1:
+        build_2d_array(array, grab.backward(equation, index), 1)
     else:
-        build_2d_array(array, forward_grab(pure_string, index), -1)
+        build_2d_array(array, grab.forward(equation, index), -1)
         index += 1
     while 42:
-        index, o_type = find.operators(pure_string, index)
+        index, o_type = find.operators(equation, index)
         if index == -1:
             break
-        build_2d_array(array, forward_grab(pure_string, index), o_type)
+        build_2d_array(array, grab.forward(equation, index), o_type)
         index += 1
-    print(array)
+    return purify.array2D(array)
+
+
+def main():
+    test = "1 - 5X + 1X + 5X^2 = X^2 + X + 1 - 3X^4"
+    equations = purify.equation(test).split('=')
+    a = merge.difference([simplify(eq) for eq in equations])
+    print(a)
 
 
 if __name__ == '__main__':
