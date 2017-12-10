@@ -78,7 +78,7 @@ def main():
     print(display_reduced(a))
     print("Polynomial degree: " + str(len(a) - 1))
     if len(a) == 1:
-        print("This equation is not solvable. There must be at least one unknown value.")
+        print("This equation is not solvable.")
     elif len(a) == 2:
         solve.first_degree(a)
     elif len(a) == 3:
