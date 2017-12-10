@@ -1,9 +1,8 @@
-import numpy as np
-
 import purify
 import find
 import grab
 import merge
+import solve
 
 
 def check_array_order(array, level):
@@ -49,14 +48,24 @@ def simplify(equation):
             break
         build_2d_array(array, grab.forward(equation, index), o_type)
         index += 1
-    return purify.array2D(array)
+    return purify.array2d(array)
 
 
 def main():
-    test = "1 - 5X + 1X + 5X^2 = X^2 + X + 1 - 3X^4"
+    test = "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
     equations = purify.equation(test).split('=')
     a = merge.difference([simplify(eq) for eq in equations])
+    # Todo Reduced form function here.
     print(a)
+    print("Polynomial degree: " + str(len(a) - 1))
+    if len(a) == 1:
+        print("This equation is not solvable. There must be at least one unknown value.")
+    elif len(a) == 2:
+        solve.first_degree(a)
+    elif len(a) == 3:
+        solve.second_degree(a)
+    else:
+        print("I cannot solve the polynomial degree of " + str(len(a) - 1))
 
 
 if __name__ == '__main__':
