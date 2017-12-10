@@ -1,5 +1,6 @@
 import cmath
 
+
 def first_degree(array):
     if array[1] == 0:
         print("This first degree is not solvable")
