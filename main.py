@@ -51,12 +51,29 @@ def simplify(equation):
     return purify.array2d(array)
 
 
+def display_reduced(array):
+    if len(array) == 0:
+        return ""
+    display = "Reduced form: " + str(array[0])
+    index = 1
+    for value in array[1:]:
+        if value > -1:
+            display += " + "
+        else:
+            display += " - "
+        if int(value) == value:
+            value = int(value)
+        display += str(abs(value)) + "X^" + str(index)
+        index += 1
+    display += " = 0"
+    return display
+
+
 def main():
     test = "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
     equations = purify.equation(test).split('=')
     a = merge.difference([simplify(eq) for eq in equations])
-    # Todo Reduced form function here.
-    print(a)
+    print(display_reduced(a))
     print("Polynomial degree: " + str(len(a) - 1))
     if len(a) == 1:
         print("This equation is not solvable. There must be at least one unknown value.")
