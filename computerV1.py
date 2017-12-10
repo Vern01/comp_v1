@@ -73,18 +73,23 @@ def display_reduced(array):
 
 
 def main():
-    equations = purify.equation(sys.argv[1]).split('=')
-    a = merge.difference([simplify(eq) for eq in equations])
-    print(display_reduced(a))
-    print("Polynomial degree: " + str(len(a) - 1))
-    if len(a) == 1:
-        print("This equation is not solvable.")
-    elif len(a) == 2:
-        solve.first_degree(a)
-    elif len(a) == 3:
-        solve.second_degree(a)
-    else:
-        print("I cannot solve the polynomial degree of " + str(len(a) - 1))
+    try:
+        equations = purify.equation(sys.argv[1]).split('=')
+        a = merge.difference([simplify(eq) for eq in equations])
+        print(display_reduced(a))
+        print("Polynomial degree: " + str(len(a) - 1))
+        if len(a) == 1:
+            print("This equation is not solvable.")
+        elif len(a) == 2:
+            solve.first_degree(a)
+        elif len(a) == 3:
+            solve.second_degree(a)
+        else:
+            print("I cannot solve the polynomial degree of " + str(len(a) - 1))
+    except Exception:
+        print("There is a error within the input. Try the following format:\n "
+              "./computerV1.py \"5 * X^0 + 4 *X^1... = ...\"\np.s The ellips indicate "
+              "that you can add more. Do not add the ellips.")
 
 
 if __name__ == '__main__':

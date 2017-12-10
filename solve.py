@@ -4,7 +4,9 @@ import cmath
 def first_degree(array):
     if array[1] == 0:
         print("This first degree is not solvable")
-    elif array[0] == 0:
+    else:
+        print("The solution is:")
+    if array[0] == 0:
         print("0")
     else:
         array[0] *= -1
@@ -17,7 +19,9 @@ def __quadratic_formula(array):
         print("This quadratic equation is unsolvable.")
         return None, None
     elif d == 0:
+        print("The solution is:")
         return (-array[1] - cmath.sqrt(d)) / (2 * array[2]), None
+    print("The two solutions are:")
     a2 = (2 * array[2])
     return (-array[1] - cmath.sqrt(d)) / a2, (-array[1] + cmath.sqrt(d)) / a2
 
