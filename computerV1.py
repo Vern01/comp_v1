@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+import sys
+
 import purify
 import find
 import grab
@@ -70,8 +73,7 @@ def display_reduced(array):
 
 
 def main():
-    test = "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
-    equations = purify.equation(test).split('=')
+    equations = purify.equation(sys.argv[1]).split('=')
     a = merge.difference([simplify(eq) for eq in equations])
     print(display_reduced(a))
     print("Polynomial degree: " + str(len(a) - 1))
