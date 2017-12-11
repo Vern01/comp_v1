@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 import sys
 
+import display
 import find
 import grab
 import merge
 import purify
-from remove import array_redundant
+import remove
 import solve
 
 
@@ -55,30 +56,12 @@ def simplify(equation):
     return purify.array2d(array)
 
 
-def display_reduced(array):
-    if len(array) == 0:
-        return ""
-    display = "Reduced form: " + str(array[0])
-    index = 1
-    for value in array[1:]:
-        if value > -1:
-            display += " + "
-        else:
-            display += " - "
-        if int(value) == value:
-            value = int(value)
-        display += str(abs(value)) + "X^" + str(index)
-        index += 1
-    display += " = 0"
-    return display
-
-
 def main():
     # try:
         equations = purify.equation(sys.argv[1]).split('=')
         a = merge.difference([simplify(eq) for eq in equations])
-        a = array_redundant(a)
-        print(display_reduced(a))
+        a = remove.array_redundant(a)
+        print(display.reduced(a))
         print("Polynomial degree: " + str(len(a) - 1))
         if len(a) == 1:
             if a[0] == 0:
