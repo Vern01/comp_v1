@@ -56,7 +56,6 @@ def simplify(equation):
 
 
 def display_reduced(array):
-    print(array)
     if len(array) == 0:
         return ""
     display = "Reduced form: " + str(array[0])
@@ -75,7 +74,7 @@ def display_reduced(array):
 
 
 def main():
-    try:
+    # try:
         equations = purify.equation(sys.argv[1]).split('=')
         a = merge.difference([simplify(eq) for eq in equations])
         a = array_redundant(a)
@@ -89,12 +88,12 @@ def main():
             solve.second_degree(a)
         else:
             print("I cannot solve the polynomial degree of " + str(len(a) - 1))
-    except Exception:
-        print("The format of your input is incorrect. Here are a few tips:\n"
-              "\tUse quotation marks around your equation. i.e ./computerV1.py \"42X + 42 = 0\"\n"
-              "\tUse the '^' sign to indicate the power of the value X\n"
-              "\tMake sure there is a '=' that is either set to 0 or equation of your choice.\n"
-              "\tMake sure to remove anything that is not necessary to solve the equation.")
+    # except Exception:
+    #     print("The format of your input is incorrect. Here are a few tips:\n"
+    #           "\tUse quotation marks around your equation. i.e ./computerV1.py \"42X + 42 = 0\"\n"
+    #           "\tUse the '^' sign to indicate the power of the value X\n"
+    #           "\tMake sure there is a '=' that is either set to 0 or equation of your choice.\n"
+    #           "\tMake sure to remove anything that is not necessary to solve the equation.")
 
 
 if __name__ == '__main__':

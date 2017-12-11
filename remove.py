@@ -5,6 +5,6 @@ def string(full_string, removables):
 
 
 def array_redundant(array):
-    while array[-1] == 0:
+    while len(array) > 1 and array[-1] == 0:
         del array[-1]
     return array

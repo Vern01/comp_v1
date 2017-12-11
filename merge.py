@@ -7,5 +7,6 @@ def difference(array):
     if len(array[0]) > len(array[1]):
         diff += array[0][level:]
     elif len(array[0]) < len(array[1]):
-        diff += array[1][level:]
+        for value in array[1][level:]:
+            diff.append(-value)
     return diff
