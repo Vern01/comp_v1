@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import sys
 
-import purify
 import find
 import grab
 import merge
+import purify
 import solve
 
 
@@ -87,9 +87,11 @@ def main():
         else:
             print("I cannot solve the polynomial degree of " + str(len(a) - 1))
     except Exception:
-        print("There is a error within the input. Try the following format:\n "
-              "./computerV1.py \"5 * X^0 + 4 *X^1... = ...\"\np.s The ellips indicate "
-              "that you can add more. Do not add the ellips.")
+        print("The format of your input is incorrect. Here are a few tips:\n"
+              "\tUse quotation marks around your equation. i.e ./computerV1.py \"42X + 42 = 0\"\n"
+              "\tUse the '^' sign to indicate the power of the value X\n"
+              "\tMake sure there is a '=' that is either set to 0 or equation of your choice.\n"
+              "\tMake sure to remove anything that is not necessary to solve the equation.")
 
 
 if __name__ == '__main__':
