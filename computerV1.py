@@ -81,7 +81,10 @@ def main():
         print(display_reduced(a))
         print("Polynomial degree: " + str(len(a) - 1))
         if len(a) == 1:
-            print("This equation is not solvable.")
+            if a[0] == 0:
+                print("All real numbers are a solution.")
+            else:
+                print("This equation is not possible.")
         elif len(a) == 2:
             solve.first_degree(a)
         elif len(a) == 3:

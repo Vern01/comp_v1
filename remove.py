@@ -1,4 +1,12 @@
+import re
+
+
+def whitespace(string):
+    return re.sub("[\s]", "", string)
+
+
 def string(full_string, removables):
+    full_string = whitespace(full_string)
     for remove in removables:
         full_string = full_string.replace(remove, "")
     return full_string

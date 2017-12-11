@@ -2,7 +2,7 @@ import remove
 
 
 def equation(string):
-    return remove.string(string, [" ", "*"])
+    return remove.string(string, ["*"])
 
 
 def array2d(array):
