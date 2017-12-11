@@ -5,6 +5,7 @@ import find
 import grab
 import merge
 import purify
+from remove import array_redundant
 import solve
 
 
@@ -55,6 +56,7 @@ def simplify(equation):
 
 
 def display_reduced(array):
+    print(array)
     if len(array) == 0:
         return ""
     display = "Reduced form: " + str(array[0])
@@ -76,6 +78,7 @@ def main():
     try:
         equations = purify.equation(sys.argv[1]).split('=')
         a = merge.difference([simplify(eq) for eq in equations])
+        a = array_redundant(a)
         print(display_reduced(a))
         print("Polynomial degree: " + str(len(a) - 1))
         if len(a) == 1:
